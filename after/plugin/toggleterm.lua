@@ -26,7 +26,8 @@ function _G.toggle_float()
 end
 
 -- remaps
-vim.api.nvim_set_keymap('n', '<Leader>th', '<cmd>lua toggle_horizontal()<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<Leader>t', '<cmd>lua toggle_float()<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', [[<C-\>]], '<cmd>lua toggle_horizontal()<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>lua toggle_float()<CR>', {noremap = true, silent = true})
+
 -- Put u keybinds here
 

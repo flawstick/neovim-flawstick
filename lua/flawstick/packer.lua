@@ -39,6 +39,14 @@ return require('packer').startup(function(use)
 	  end
   })
 
+  use {
+      'luisiacc/gruvbox-baby',
+      as = 'gruvbox-baby',
+      config = function()
+          vim.cmd('colorscheme gruvbox-baby')
+      end
+  }
+
   use({
       "folke/trouble.nvim",
       config = function()
@@ -67,8 +75,15 @@ return require('packer').startup(function(use)
   use("nvim-treesitter/nvim-treesitter-context");
   use("mhartington/formatter.nvim")
 
+  use({
+      "andweeb/presence.nvim",
+    config = function()
+      require("presence")
+    end
+  })
+
   use {
-	  'VonHeikemen/lsp-zero.nvim',
+      'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
 	  requires = {
 		  -- LSP Support
@@ -94,6 +109,5 @@ return require('packer').startup(function(use)
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
-
 end)
 

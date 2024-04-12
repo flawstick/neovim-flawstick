@@ -53,6 +53,16 @@ vim.g.netrw_winsize = 25
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+-- load the colorscheme
+local colors = require("gruvbox-baby.colors").config()
+
+-- configure gruvbox preferences
+vim.g.gruvbox_baby_function_style = "NONE"
+vim.g.gruvbox_baby_keyword_style = "italic"
+vim.g.gruvbox_baby_highlights = {Normal = {fg = "#123123", bg = "NONE", style="underline"}}
+vim.g.gruvbox_baby_transparent_mode = 1
+vim.g.gruvbox_baby_highlights = {Normal = {fg = colors.magenta}}
+
 -- empty setup using defaults
 require("nvim-tree").setup()
 

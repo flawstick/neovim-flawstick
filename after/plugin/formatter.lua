@@ -4,6 +4,16 @@ vim.api.nvim_set_keymap('n', '=', ':Format<CR>', { noremap = true, silent = true
 -- formatter.lua
 require('formatter').setup({
   filetype = {
+    lua = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true
+        }
+      end
+    },
     javascript = {
       -- prettier
       function()
@@ -74,6 +84,37 @@ require('formatter').setup({
         }
       end
     },
+    json = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true
+        }
+      end
+    },
+    python = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true
+        }
+      end
+    },
+    markdown = {
+      -- prettier
+      function()
+        return {
+          exe = "prettier",
+          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true
+        }
+      end
+    }
+
   }
 })
 
@@ -81,7 +122,7 @@ require('formatter').setup({
 vim.api.nvim_exec([[
   augroup FormatAutogroup
     autocmd!
-    autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.html FormatWrite
+    autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.html,*.json FormatWrite
   augroup END
 ]], true)
 
