@@ -8,8 +8,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
-	  -- or                            , branch = '0.1.x',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
@@ -42,9 +41,11 @@ return require('packer').startup(function(use)
   use {
       'luisiacc/gruvbox-baby',
       as = 'gruvbox-baby',
-      config = function()
-          vim.cmd('colorscheme gruvbox-baby')
-      end
+  }
+
+  use {
+      'bluz71/vim-moonfly-colors',
+      as = 'moonfly'
   }
 
   use({
@@ -74,6 +75,9 @@ return require('packer').startup(function(use)
   use("tpope/vim-fugitive")
   use("nvim-treesitter/nvim-treesitter-context");
   use("mhartington/formatter.nvim")
+  use 'wbthomason/packer.nvim' -- Packer manages itself
+  use 'mhartington/formatter.nvim'
+
 
   use({
       "andweeb/presence.nvim",
@@ -109,5 +113,7 @@ return require('packer').startup(function(use)
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
+  use("lervag/vimtex")
+  use("KeitaNakamura/tex-conceal.vim")
 end)
 

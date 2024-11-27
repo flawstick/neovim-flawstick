@@ -1,7 +1,3 @@
--- init.lua or another suitable configuration file
-vim.api.nvim_set_keymap('n', '=', ':Format<CR>', { noremap = true, silent = true })
-
--- formatter.lua
 require('formatter').setup({
   filetype = {
     lua = {
@@ -113,16 +109,29 @@ require('formatter').setup({
           stdin = true
         }
       end
+    },
+    cpp = {
+      -- clang-format
+      function()
+        return {
+          exe = "clang-format",
+          args = {"--assume-filename", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+          stdin = true,
+          cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+        }
+      end
     }
-
   }
 })
 
--- Optional: format on save
-vim.api.nvim_exec([[
-  augroup FormatAutogroup
-    autocmd!
-    autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.html,*.json FormatWrite
-  augroup END
-]], true)
+-- Keybinding for formatting
+vim.api.nvim_set_keymap('n', '=', ':Format<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_create_augroup("FormatAutogroup", {})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = {"*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.scss", "*.html", "*.json", "*.cpp", "*.md", "*.py", "*.h", "*.hpp"},
+  group = "FormatAutogroup",
+  callback = function()
+    vim.cmd("FormatWrite")
+  end
+})
