@@ -79,3 +79,12 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
+-- disable winfixbuf for avante
+vim.api.nvim_create_autocmd("User", {
+  pattern = "AvanteSidebarOpen",
+  callback = function()
+    vim.wo.winfixbuf = false
+    vim.opt_local.winfixbuf = false
+  end,
+})

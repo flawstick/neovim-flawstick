@@ -121,7 +121,10 @@ vim.api.nvim_set_keymap('n', '=', ':Format<CR>', { noremap = true, silent = true
 -- Auto format on save
 vim.api.nvim_create_augroup("FormatAutogroup", {})
 vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = {"*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.scss", "*.html", "*.json", "*.cpp", "*.md", "*.py", "*.h", "*.hpp"},
+  pattern = {"*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.scss", "*.html",
+  "*.json", "*.md", "*.py", "*.hpp", "lua",
+  -- "*.cpp", "*.h"
+  },
   group = "FormatAutogroup",
   callback = function()
     vim.cmd("FormatWrite")

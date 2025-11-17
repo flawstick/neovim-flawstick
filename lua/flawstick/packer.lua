@@ -79,6 +79,31 @@ return require('packer').startup(function(use)
   use 'mhartington/formatter.nvim'
 
 
+  -- avante
+  -- Required plugins
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'stevearc/dressing.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'MunifTanjim/nui.nvim'
+  use 'MeanderingProgrammer/render-markdown.nvim'
+
+  -- Optional dependencies
+  use 'hrsh7th/nvim-cmp'
+  use 'nvim-tree/nvim-web-devicons' -- or use 'echasnovski/mini.icons'
+  use 'HakonHarnes/img-clip.nvim'
+  use 'zbirenbaum/copilot.lua'
+
+  use {
+      "yetone/avante.nvim",
+      run = "make",
+      requires = {
+          "nvim-lua/plenary.nvim",
+          "MunifTanjim/nui.nvim",
+          "folke/snacks.nvim",
+      },
+  }
+
+
   use({
       "andweeb/presence.nvim",
     config = function()
@@ -86,28 +111,22 @@ return require('packer').startup(function(use)
     end
   })
 
-  use {
-      'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
+  -- LSP Configuration
+  use 'neovim/nvim-lspconfig'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
+  -- Autocompletion
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
 
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},
-		  {'rafamadriz/friendly-snippets'},
-	  }
-  }
+  -- Snippets
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
+  use 'rafamadriz/friendly-snippets'
 
   use("folke/zen-mode.nvim")
   use("github/copilot.vim")
@@ -115,5 +134,17 @@ return require('packer').startup(function(use)
   use("laytan/cloak.nvim")
   use("lervag/vimtex")
   use("KeitaNakamura/tex-conceal.vim")
+
+  use({
+      "epwalsh/obsidian.nvim",           -- or "obsidian-nvim/obsidian.nvim" (community-maintained fork)
+      requires = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+      config = function()
+          require("obsidian").setup({
+              dir = "~/Documents/Endeavour/",   -- path to your vault; auto-detects `.obsidian/` by default
+              completion = { nvim_cmp = true },  -- `[[wikilinks]]` & `#tags` completion
+              mappings = { ["gf"] = require("obsidian.mappings").gf_passthrough() },
+          })
+      end,
+  })
 end)
 
